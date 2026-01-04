@@ -7,17 +7,17 @@ function Hero() {
   return (
     <>
     <section className='relative min-h-screen flex items-center justify-center overflow-hidden'>
-      <div className='absolute top-0 left-0 w-1/3 h-full bg-cover bg-center bg-linear-to-r from-black/70 to-transparent' style={{backgroundImage:`url(${northernlights})`}}></div>
-      <div className="absolute top-0 left-0 w-1/3 h-full bg-linear-to-r from-black/70 to-transparent"></div>
+      <div className='absolute  top-0 left-0 h-1/3 w-full sm:w-1/3 sm:h-full bg-cover bg-center linear-to-r from-black/70 to-transparent' style={{backgroundImage:`url(${northernlights})`}}></div>
+      <div className="absolute top-0 left-0 h-1/3 w-full sm:w-1/3 sm:h-full sm:bg-linear-to-r from-black/70 to-transparent"></div>
 
-      <div className='absolute top-0 left-1/3 w-1/3 h-full bg-cover bg-center bg-linear-to-r from-black/70 to-transparent' style={{backgroundImage:`url(${oldtown})`}}></div>
-      <div className="absolute top-0 left-1/3 w-1/3 h-full bg-linear-to-r from-black/70 to-transparent"></div>
+      <div className='absolute top-1/3 left-0 h-1/3 w-full sm:top-0 sm:left-1/3 sm:w-1/3 sm:h-full bg-cover bg-center bg-linear-to-r from-black/70 to-transparent' style={{backgroundImage:`url(${oldtown})`}}></div>
+      <div className="absolute top-1/3 h-1/3 w-full sm:top-0 sm:left-1/3 sm:w-1/3 sm:h-full bg-linear-to-r from-black/70 to-transparent"></div>
 
 
 
-       <div className='absolute top-0 left-2/3 w-1/3 h-full bg-cover bg-center bg-linear-to-r from-black/70 to-transparent' style={{backgroundImage:`url(${thedarkhedges})`}}></div>
+       <div className='absolute top-2/3 h-1/3 w-full sm:top-0 sm:left-2/3 sm:w-1/3 sm:h-full bg-cover bg-center bg-linear-to-r from-black/70 to-transparent' style={{backgroundImage:`url(${thedarkhedges})`}}></div>
 
-       <div className="absolute top-0 left-2/3 w-1/3 h-full bg-linear-to-r from-black/70 to-transparent"></div>
+       <div className="absolute top2/3 h-2/3 sm:top-0 sm:left-2/3 sm:w-1/3 sm:h-full bg-linear-to-r from-black/70 to-transparent"></div>
 
 
 
