@@ -9,7 +9,7 @@ function CityCard({ city, weatherUI, onClick }) {
   return (
     <div
       onClick={() => onClick(city.Name)}
-      className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 mb-6 max-w-md mx-auto cursor-pointer"
+      className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 mb-8 w-xs   sm:w-md md:w-md mx-auto cursor-pointer"
     >
       <img
         className="w-full h-48 object-cover"
@@ -34,7 +34,7 @@ function CityCard({ city, weatherUI, onClick }) {
         )}
           
       <div className="flex justify-center pb-5">
-        <button onClick={(e)=>{e.stopPropagation();addCityToItinerary(city)}}className="bg-gray-900 text-white p-2 font-bold rounded">
+        <button onClick={(e)=>{e.stopPropagation();addCityToItinerary(city)}} className="bg-gray-900 text-white p-2 font-bold rounded hover:bg-gray-700 cursor-pointer focus:outline-2 focus:outline-offset-2 focus:outline-gray-600">
           Add To Trip
         </button>
       </div>
