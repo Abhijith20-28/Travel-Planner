@@ -9,16 +9,13 @@ export function useAccomodations(cityId) {
     if(!cityId) return; 
     async function fetchAccomodations() {
       const snapshot = await getDocs(collection(db,"cities",cityId,"accomodations"));
-     
       const accomodations = snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data(),
       }));
-     
     setAccomodations(accomodations)
     }
     fetchAccomodations();
-    
   }, [cityId]);
 
   return accomodations;
