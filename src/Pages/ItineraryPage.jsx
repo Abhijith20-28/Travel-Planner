@@ -1,14 +1,10 @@
-import React from 'react'
-import Itinerary from '../Components/Itinerary'
-import ModalCity from '../Modal/ModalCity'
+import Itinerary from '../Components/Itinerary';
 
-function ItineraryPage() {
+function Itinerarypage() {
   return (
     <div>
-      <Itinerary/>
-      <ModalCity/>
+       <Itinerary/>
     </div>
   )
 }
-
-export default ItineraryPage
+export default Itinerarypage
