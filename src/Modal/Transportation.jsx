@@ -14,7 +14,16 @@ function Transportation() {
            <span className='text-xs uppercase tracking-wide text-gray-500'>{vehicle.type}</span>
            <p className='text-sm text-gray-600 line-clamp-2'>{vehicle.details}</p>
            <div className='flex justify-center pb-2'>
-           <button onClick={()=>setSelectedPlan({...selectedPlan,transportation:{name:vehicle.name,image:vehicle.image}})} className='mt-3 w-48 rounded-lg border bg-gray-600 text-white py-2 text-sm font-medium  transition-colors'>Select this Mode</button>
+           <button onClick={()=>setSelectedPlan(prev=>({
+            ...prev,
+            [selectedCityId]:{
+              ...prev[selectedCityId],
+              transportation:{
+                name:vehicle.name,
+                image:vehicle.image
+              }
+            }
+           }))} className='mt-3 w-48 rounded-lg border bg-gray-600 text-white py-2 text-sm font-medium  transition-colors'>Select this Mode</button>
            </div>
         </div>
       )):""}
