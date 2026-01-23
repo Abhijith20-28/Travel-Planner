@@ -8,10 +8,8 @@ import { TripContext } from "../Context/TripContext.jsx";
 import PopUp from "../Components/PopUp.jsx";
 
 function SearchPage() {
-  const [destinationinput, setDestinationInput] = useState("");
-  const [filtered, setFiltered] = useState([]);
-  const [weatherUI, setWeatherUI] = useState(null);
-  const{addPopUp}=useContext(TripContext)
+  
+  const{addPopUp,destinationinput,setDestinationInput,weatherUI,setWeatherUI,setFiltered,filtered}=useContext(TripContext)
   const cities = useCities();
   const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
