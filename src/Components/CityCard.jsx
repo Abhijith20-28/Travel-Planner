@@ -5,10 +5,12 @@ function CityCard({ city, weatherUI, onClick }) {
   const showWeather =
     weatherUI &&
     weatherUI.city.trim().toLowerCase() === city.Name.trim().toLowerCase();
- const {addCityToItinerary}=useContext(TripContext)
+ const {addCityToItinerary,itinerary}=useContext(TripContext)
+
+ const isAlreadyAdded =itinerary.some(c=>c.id === city.id)
   return (
     <div
-      onClick={() => onClick(city.Name)}
+      onClick={() =>onClick(city.Name)}
       className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 mb-8 w-xs   sm:w-md md:w-md mx-auto cursor-pointer"
     >
       <img
@@ -28,14 +30,16 @@ function CityCard({ city, weatherUI, onClick }) {
         </p>
 
         {showWeather && (
-          <p className="text-sm text-gray-600 mt-2">
+          <p className="text-sm text-black-600 mt-2">
             Temp: {weatherUI.temperature}°C — {weatherUI.condition}
           </p>
         )}
           
       <div className="flex justify-center pb-5">
-        <button onClick={(e)=>{e.stopPropagation();addCityToItinerary(city)}} className="bg-gray-900 text-white p-2 font-bold rounded hover:bg-gray-700 cursor-pointer focus:outline-2 focus:outline-offset-2 focus:outline-gray-600">
-          Add To Trip
+        <button 
+        disabled={isAlreadyAdded}
+        onClick={(e)=>{e.stopPropagation();addCityToItinerary(city)}} className={`p-2 font-bold rounded ${isAlreadyAdded?'bg-gray-500 text-white cursor-not-allowed':'bg-gray-900 text-white  hover:bg-gray-700 cursor-pointer focus:outline-2 focus:outline-offset-2 focus:outline-gray-600'}`}>
+          {isAlreadyAdded?"Added":"Add To Trip"}
         </button>
       </div>
 
