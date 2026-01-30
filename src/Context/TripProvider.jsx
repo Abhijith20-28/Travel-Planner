@@ -7,23 +7,27 @@ function TripProvider({ children }) {
   const allCities = useCities(); 
   const [destinationInput, setDestinationInput] = useState("");
   const [filteredCities, setFilteredCities] = useState([]);
-  const [isModal,setIsModal] = useState(false);
-  const [selectedCityId,setSelectedCityId]=useState(null);
   const [weatherUI, setWeatherUI] = useState(null);
-  const [selectedPlan,setSelectedPlan]=useState({transportation:null,accommodation:null,activities:[]});
-  const [itinerary,setItinerary]=useState(
+
+   const [itinerary,setItinerary]=useState(
    ()=>{
      const saved =localStorage.getItem('plans')
      return saved?JSON.parse(saved):[]
-});
+   });
 
- useEffect(()=>{
-    localStorage.setItem('plans',JSON.stringify(itinerary))
-  },[itinerary])
+  const [selectedPlan,setSelectedPlan]=useState(()=>{
+  const saved = localStorage.getItem('selectedDetails')
+    return saved? JSON.parse(saved):{}
+  });
+
+  const [isModal,setIsModal] = useState(false);
+  const [selectedCityId,setSelectedCityId]=useState(null);
+  const [addPopUp,setAddPopUp]=useState(false);
 
   const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
-  useEffect(() => {
+
+ useEffect(() => {
     setFilteredCities(
       allCities.filter((city) =>
         city.Name.toLowerCase().includes(destinationInput.toLowerCase())
@@ -31,42 +35,64 @@ function TripProvider({ children }) {
     );
   }, [destinationInput, allCities]);
 
-  const handleCityClick = async (city) => {
-    
-    const data = await fetchWeather(city.Name, apiKey);
+
+  const handleCityClick = async (cityName) => {
+  
+    const data = await fetchWeather(cityName, apiKey);
     setWeatherUI({
-      city: city.Name,
+      city: cityName,
       temperature: data.main.temp,
       condition: data.weather[0].main,
     });
   };
 
+
   const addCityToItinerary=(city)=>{
-  
+
     setItinerary((prev)=>{
       const exists = prev.some((c)=>c.Name.toLowerCase()===city.Name.toLowerCase());
       if (exists) return prev;
-     
       return[...prev,city]  
-   
     })
+    setAddPopUp(true)
+
   }
 
-  const removeCityFromItinerary=(city)=>{
+   const removeCityFromItinerary=(city)=>{
     const filter = itinerary.filter((des)=>des.id !== city.id);
     setItinerary(filter);
   }
 
-   const clickModal=(city)=>{
+ 
+  const clickModal=(city)=>{
     setIsModal(true)
     setSelectedCityId(city.id)
-
+   
   }
   const closeModal=(city)=>{
     setIsModal(false)
     setSelectedCityId(null)
   }
+
+  
+ useEffect(()=>{
+    localStorage.setItem('plans',JSON.stringify(itinerary))
+  },[itinerary])
+
+  useEffect(()=>{
+    localStorage.setItem('selectedDetails',JSON.stringify(selectedPlan))
+  })
+
+
+
  
+  const [filtered, setFiltered] = useState([]);
+  const [selectedTab,setSelectedTab]=useState('');
+ 
+ const selectCity=(cityId)=>{
+  setSelectedCityId(cityId)
+ }
+
   const tripData = {
     destinationInput,
     setDestinationInput,
@@ -83,8 +109,14 @@ function TripProvider({ children }) {
     setSelectedCityId,
     closeModal,
     selectedPlan,
-    setSelectedPlan
- 
+    setSelectedPlan,
+    selectedTab,
+    setSelectedTab,
+    selectCity,
+    addPopUp,
+    setAddPopUp,
+    filtered,
+    setFiltered
   };
   
   return (
